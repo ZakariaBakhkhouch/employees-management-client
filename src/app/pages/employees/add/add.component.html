@@ -1,0 +1,45 @@
+<div class="container">
+    <form>
+        <div>
+            <h3>Add Employee</h3>
+        </div>
+        <div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="Employee.firstName" name="firstName">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="Employee.lastName" name="lastName">
+            </div>
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" class="form-control" required [(ngModel)]="Employee.dateOfBirth" name="dateOfBirth">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" required [(ngModel)]="Employee.email" name="email">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" required [(ngModel)]="Employee.phoneNumber" name="phone">
+            </div>
+            <div class="form-group">
+                <label>Hire Date</label>
+                <input type="date" class="form-control" required [(ngModel)]="Employee.hireDate" name="hireDate">
+            </div>
+            <div class="form-group">
+                <label>Position</label>
+                <input type="text" class="form-control" required [(ngModel)]="Employee.position" name="position">
+            </div>
+            <div class="form-group">
+                <label>Salary</label>
+                <input type="number" class="form-control" required [(ngModel)]="Employee.salary" name="salary">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Back" routerLink="/employees">
+            <input type="submit" class="btn btn-success" value="Add" (click)="AddEmployee()">
+        </div>
+    </form>
+</div>
