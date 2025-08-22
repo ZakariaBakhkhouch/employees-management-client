@@ -24,6 +24,15 @@ export class AddComponent {
     // Initialization logic can go here
   }
 
+  onSubmit(form: any) {
+    if (form.valid) {
+      console.log("Form Submitted:", this.Employee);
+      // 👉 Here you could send data to your API/service
+    } else {
+      console.log("Form is invalid");
+    }
+  }
+
   AddEmployee(): void {
     // Logic to add an employee will go here
     this.Employee.departmentId = "3853a3c3-e154-4929-9d29-c093f49f4568";

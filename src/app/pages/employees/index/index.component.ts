@@ -47,6 +47,7 @@ export class IndexComponent {
   GetEmployees(page: number = 1): void {
     this.employeeService.getEmployees(page, this.pageSize).subscribe({
       next: (res) => {
+        console.log('Employees fetched successfully:', res.data.data);
         this.employees = res.data.data;
         this.pageNumber = res.data.pageNumber;
         this.pageSize = res.data.pageSize;
@@ -72,6 +73,17 @@ export class IndexComponent {
       },
       error: (err) => {
         console.error('Error updating employee', err);
+      }
+    });
+  }
+
+  DeleteAllEmployees(): void {
+    this.employeeService.deleteAllEmployees().subscribe({
+      next: (response) => {
+        location.reload(); 
+      },
+      error: (err) => {
+        console.error('Error deleting all employees', err);
       }
     });
   }

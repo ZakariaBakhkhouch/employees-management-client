@@ -9,6 +9,7 @@ import { EmployeeListModel } from '../models/EmployeesListModel';
 @Injectable({
   providedIn: 'root'
 })
+
 export class EmployeeService {
   private apiUrl = 'http://localhost:5008/api/employees';
 
@@ -26,11 +27,15 @@ export class EmployeeService {
     return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
   }
 
-  createEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrl, employee);
+  createEmployee(employee: Employee): Observable<BaseResponse> {
+    return this.http.post<BaseResponse>(this.apiUrl, employee);
   }
 
   deleteEmployee(id: string): Observable<BaseResponse> {
     return this.http.delete<BaseResponse>(`${this.apiUrl}/${id}`);
+  }
+
+  deleteAllEmployees(): Observable<BaseResponse> {
+    return this.http.delete<BaseResponse>(this.apiUrl);
   }
 }

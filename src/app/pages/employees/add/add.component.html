@@ -4,42 +4,110 @@
             <h3>Add Employee</h3>
         </div>
         <div>
-            <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" required [(ngModel)]="Employee.firstName" name="firstName">
-            </div>
-            <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" required [(ngModel)]="Employee.lastName" name="lastName">
-            </div>
-            <div class="form-group">
-                <label>Date of Birth</label>
-                <input type="date" class="form-control" required [(ngModel)]="Employee.dateOfBirth" name="dateOfBirth">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" required [(ngModel)]="Employee.email" name="email">
-            </div>
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" required [(ngModel)]="Employee.phoneNumber" name="phone">
-            </div>
-            <div class="form-group">
-                <label>Hire Date</label>
-                <input type="date" class="form-control" required [(ngModel)]="Employee.hireDate" name="hireDate">
-            </div>
-            <div class="form-group">
-                <label>Position</label>
-                <input type="text" class="form-control" required [(ngModel)]="Employee.position" name="position">
-            </div>
-            <div class="form-group">
-                <label>Salary</label>
-                <input type="number" class="form-control" required [(ngModel)]="Employee.salary" name="salary">
-            </div>
+            <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)" novalidate>
+
+                <!-- First Name -->
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" required minlength="2" [(ngModel)]="Employee.firstName"
+                        name="firstName" #firstName="ngModel">
+
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="text-danger">
+                        <small *ngIf="firstName.errors?.['required']">First name is required.</small>
+                        <small *ngIf="firstName.errors?.['minlength']">Minimum 2 characters required.</small>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" required minlength="2" [(ngModel)]="Employee.lastName"
+                        name="lastName" #lastName="ngModel">
+
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">
+                        <small *ngIf="lastName.errors?.['required']">Last name is required.</small>
+                        <small *ngIf="lastName.errors?.['minlength']">Minimum 2 characters required.</small>
+                    </div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" class="form-control" required [(ngModel)]="Employee.dateOfBirth"
+                        name="dateOfBirth" #dob="ngModel">
+
+                    <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="text-danger">
+                        <small *ngIf="dob.errors?.['required']">Date of Birth is required.</small>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" required email [(ngModel)]="Employee.email" name="email"
+                        #email="ngModel">
+
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                        <small *ngIf="email.errors?.['required']">Email is required.</small>
+                        <small *ngIf="email.errors?.['email']">Invalid email format.</small>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" required
+                        [(ngModel)]="Employee.phoneNumber" name="phone" #phone="ngModel">
+
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="text-danger">
+                        <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
+                    </div>
+                </div>
+
+                <!-- Hire Date -->
+                <div class="form-group">
+                    <label>Hire Date</label>
+                    <input type="date" class="form-control" required [(ngModel)]="Employee.hireDate" name="hireDate"
+                        #hireDate="ngModel">
+
+                    <div *ngIf="hireDate.invalid && (hireDate.dirty || hireDate.touched)" class="text-danger">
+                        <small *ngIf="hireDate.errors?.['required']">Hire Date is required.</small>
+                    </div>
+                </div>
+
+                <!-- Position -->
+                <div class="form-group">
+                    <label>Position</label>
+                    <input type="text" class="form-control" required minlength="2" [(ngModel)]="Employee.position"
+                        name="position" #position="ngModel">
+
+                    <div *ngIf="position.invalid && (position.dirty || position.touched)" class="text-danger">
+                        <small *ngIf="position.errors?.['required']">Position is required.</small>
+                        <small *ngIf="position.errors?.['minlength']">At least 2 characters required.</small>
+                    </div>
+                </div>
+
+                <!-- Salary -->
+                <div class="form-group">
+                    <label>Salary</label>
+                    <input type="number" class="form-control" required min="1000" [(ngModel)]="Employee.salary"
+                        name="salary" #salary="ngModel">
+
+                    <div *ngIf="salary.invalid && (salary.dirty || salary.touched)" class="text-danger">
+                        <small *ngIf="salary.errors?.['required']">Salary is required.</small>
+                        <small *ngIf="salary.errors?.['min']">Salary must be at least 1000.</small>
+                    </div>
+                </div>
+
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Back" routerLink="/employees">
+                |
+                <button class="btn btn-primary" [disabled]="employeeForm.invalid" (click)="AddEmployee()">Submit</button>
+            </form>
+
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
             <input type="button" class="btn btn-default" data-dismiss="modal" value="Back" routerLink="/employees">
             <input type="submit" class="btn btn-success" value="Add" (click)="AddEmployee()">
-        </div>
+        </div> -->
     </form>
 </div>
