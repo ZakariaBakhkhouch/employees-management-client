@@ -4,6 +4,8 @@ import { Employee } from '../../../models/Employee';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../../../services/employees.service';
+import { DepartmentsService } from '../../../services/departments.service';
+import { Department } from '../../../models/Department';
 
 @Component({
   selector: 'app-add',
@@ -14,14 +16,17 @@ import { EmployeeService } from '../../../services/employees.service';
 export class AddComponent {
 
   Employee: Employee = {} as Employee;
+  departments: Department[] = [];
   
   constructor(private employeeService: EmployeeService,
+    private departmentsService: DepartmentsService,
     private router: Router
   ) 
   { }
 
   ngOnInit(): void {
     // Initialization logic can go here
+    this.GetDepartments();
   }
 
   onSubmit(form: any) {
@@ -47,5 +52,17 @@ export class AddComponent {
       }
     });
     console.log('Add Employee button clicked');
+  }
+
+  GetDepartments(page: number = 1): void {
+    this.departmentsService.getDepartments(page, 999).subscribe({
+      next: (res) => {
+        this.departments = res.data.data;
+        console.log('Departments fetched successfully:', this.departments);
+      },
+      error: (err) => {
+        alert('Error fetching departments');
+      }
+    });
   }
 }

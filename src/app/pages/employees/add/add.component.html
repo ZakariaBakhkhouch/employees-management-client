@@ -98,6 +98,22 @@
                         <small *ngIf="salary.errors?.['min']">Salary must be at least 1000.</small>
                     </div>
                 </div>
+                <!-- Department -->
+                <div class="form-group">
+                    <label>Department</label>
+                    <select class="form-control" required [(ngModel)]="Employee.departmentId" name="departmentId"
+                        #departmentId="ngModel">
+                        <option value="">Select Department</option>
+                        <option *ngFor="let department of departments" [value]="department.id">
+                            {{ department.name }}
+                        </option>
+                    </select>
+
+                    <div *ngIf="departmentId.invalid && (departmentId.dirty || departmentId.touched)"
+                        class="text-danger">
+                        <small *ngIf="departmentId.errors?.['required']">Department is required.</small>
+                    </div>
+                </div>
 
                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Back" routerLink="/employees">
                 |

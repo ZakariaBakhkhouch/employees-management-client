@@ -4,6 +4,8 @@ import { EmployeeService } from '../../../services/employees.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { DepartmentsService } from '../../../services/departments.service';
+import { Department } from '../../../models/Department';
 
 @Component({
   selector: 'app-index',
@@ -14,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 
 export class IndexComponent {
   employees: Employee[] = [];
+  departments: Department[] = [];
 
   pageNumber = 1;
   pageSize = 8;
@@ -22,7 +25,9 @@ export class IndexComponent {
 
   selectedEmployee: Employee = {} as Employee;
   
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService,
+      private departmentsService: DepartmentsService
+  ) { }
 
   ngOnInit(): void {
     this.GetEmployees();
@@ -56,6 +61,17 @@ export class IndexComponent {
       },
       error: (err) => {
         alert('Error fetching employees');
+      }
+    });
+  }
+
+  GetDepartments(page: number = 1): void {
+    this.departmentsService.getDepartments(page, this.pageSize).subscribe({
+      next: (res) => {
+        console.log('Departments:', res.data.data);
+      },
+      error: (err) => {
+        alert('Error fetching departments');
       }
     });
   }
