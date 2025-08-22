@@ -39,6 +39,7 @@ export class IndexComponent {
         location.reload(); 
       },
       error: (err) => {
+        alert('Error deleting employees');
         console.error('Error deleting employee', err);
       }
     });
@@ -47,7 +48,6 @@ export class IndexComponent {
   GetEmployees(page: number = 1): void {
     this.employeeService.getEmployees(page, this.pageSize).subscribe({
       next: (res) => {
-        console.log('Employees fetched successfully:', res.data.data);
         this.employees = res.data.data;
         this.pageNumber = res.data.pageNumber;
         this.pageSize = res.data.pageSize;
@@ -55,7 +55,7 @@ export class IndexComponent {
         this.totalPages = res.data.totalPages;
       },
       error: (err) => {
-        console.error('Error fetching employees', err);
+        alert('Error fetching employees');
       }
     });
   }
@@ -72,6 +72,7 @@ export class IndexComponent {
         location.reload(); 
       },
       error: (err) => {
+        alert('Error updating employee');
         console.error('Error updating employee', err);
       }
     });
@@ -83,6 +84,7 @@ export class IndexComponent {
         location.reload(); 
       },
       error: (err) => {
+        alert('Error deleting employees');
         console.error('Error deleting all employees', err);
       }
     });
