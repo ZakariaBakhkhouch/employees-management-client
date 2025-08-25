@@ -40,7 +40,6 @@ export class AddComponent {
 
   AddEmployee(): void {
     // Logic to add an employee will go here
-    this.Employee.departmentId = "3853a3c3-e154-4929-9d29-c093f49f4568";
     this.employeeService.createEmployee(this.Employee).subscribe({
       next: (response) => {
         console.log('Employee added successfully:', response);

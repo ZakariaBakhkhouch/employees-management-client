@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { Employee } from '../models/Employee';
 import { BaseResponse } from '../models/BaseResponse';
 import { EmployeeListModel } from '../models/EmployeesListModel';
-// import { Employee } from '../models/Employee';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class EmployeeService {
-  private apiUrl = 'http://localhost:5008/api/employees';
+  private apiUrl = environment.apiBaseUrl + '/employees';
 
   constructor(private http: HttpClient) { }
 

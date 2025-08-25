@@ -23,6 +23,7 @@
           <th>Email</th>
           <th>Phone</th>
           <th>Hire Date</th>
+          <th>Department</th>
           <th>Position</th>
           <th>Salary</th>
           <th>Actions</th>
@@ -36,6 +37,7 @@
           <td>{{ emp.email }}</td>
           <td>{{ emp.phoneNumber }}</td>
           <td>{{ emp.hireDate | date:'dd/MM/yyyy'}}</td>
+          <td>{{ emp.department.name }}</td>
           <td>{{ emp.position }}</td>
           <td>{{ emp.salary }}</td>
           <td>
@@ -113,6 +115,18 @@
           <div class="form-group">
             <label>Position</label>
             <input type="text" class="form-control" required [(ngModel)]="selectedEmployee.position" name="position">
+          </div>
+          <div class="form-group">
+            <!-- <label>Department</label>
+            <input type="text" class="form-control" required [(ngModel)]="selectedEmployee.departmentId" name="position"> -->
+            <label>Department</label>
+            <select class="form-control" required [(ngModel)]="selectedEmployee.departmentId" name="departmentId"
+                #departmentId="ngModel">
+                <option value="" disabled>Select Department</option>
+                <option *ngFor="let department of departments" [value]="department.id">
+                    {{ department.name }}
+                </option>
+            </select>
           </div>
           <div class="form-group">
             <label>Salary</label>

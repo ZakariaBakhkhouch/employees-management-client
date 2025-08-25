@@ -1,3 +1,5 @@
+import { Department } from "./Department";
+
 export interface Employee {
   id: string;
   firstName: string;
@@ -5,10 +7,10 @@ export interface Employee {
   email: string;
   dateOfBirth: string;  // ISO string from backend
   hireDate: Date;
-  department: string;
   salary: number;
   position: string;
   departmentId: string;
   address: string;
   phoneNumber: string;
+  department: Department;
 }

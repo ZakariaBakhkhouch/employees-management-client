@@ -31,6 +31,7 @@ export class IndexComponent {
 
   ngOnInit(): void {
     this.GetEmployees();
+    this.GetDepartments();
   }
 
   ShowEmployeeDetails(emp: Employee): void {
@@ -53,6 +54,7 @@ export class IndexComponent {
   GetEmployees(page: number = 1): void {
     this.employeeService.getEmployees(page, this.pageSize).subscribe({
       next: (res) => {
+        console.log(res);
         this.employees = res.data.data;
         this.pageNumber = res.data.pageNumber;
         this.pageSize = res.data.pageSize;
@@ -68,6 +70,7 @@ export class IndexComponent {
   GetDepartments(page: number = 1): void {
     this.departmentsService.getDepartments(page, this.pageSize).subscribe({
       next: (res) => {
+        this.departments = res.data.data;
         console.log('Departments:', res.data.data);
       },
       error: (err) => {

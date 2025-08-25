@@ -4,15 +4,14 @@ import { Observable } from 'rxjs';
 import { Employee } from '../models/Employee';
 import { BaseResponse } from '../models/BaseResponse';
 import { DepartmentsListModel } from '../models/DepartmentsListModel';
-
-// import { Employee } from '../models/Employee';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DepartmentsService {
-  private apiUrl = 'http://localhost:5008/api/departments';
+  private apiUrl =  environment.apiBaseUrl + '/departments';
 
   constructor(private http: HttpClient) { }
 
